@@ -1,0 +1,7 @@
+asgiref==3.8.1
+Django==5.1.1
+django-extensions==3.2.3
+pydot==3.0.1
+pyparsing==3.1.4
+sqlparse==0.5.1
+tzdata==2024.1
