@@ -3,16 +3,17 @@ from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
-class Specializaion(models.Model):
-    name = models.CharField(max_length=100)
+class Specialize(models.Model):
+    name = models.CharField(max_length=100, null=True, verbose_name='نام تخصص')
 
     def __str__(self):
         return f"{self.name}"
 
 
 class Doctor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    specialization = models.ForeignKey(Specializaion, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=255, null=True, verbose_name='نام')
+    last_name = models.CharField(max_length=255, null=True, verbose_name='نام خانوادگی')
+    specializes = models.ForeignKey(Specialize, on_delete=models.CASCADE)
     phone = models.CharField(max_length=15)
     clinic_address = models.TextField()
     license_number = models.CharField(max_length=11)
@@ -41,7 +42,6 @@ class VisitCost(models.Model):
         return f"{self.doctor}: {self.cost}"
 
 
-
 class Comment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=80)
@@ -59,19 +59,19 @@ class Comment(models.Model):
         return f"کاربر {self.name} به دکتر {self.doctor} نظر خود را ثبت کرد"
 
 
-class Rating(models.Model):
-    first_name = models.CharField()
-    last_name = models.CharField()
-    product = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    score = models.PositiveIntegerField(
-        validators=[
-            MinValueValidator(1),
-            MaxValueValidator(5)
-        ]
-    )
-    comment = models.TextField(blank=True, null=True)
-
-
-class Patient(models.Model):
-    user = models.OneToOneField(User, models.CASCADE)
+# class Rating(models.Model):
+#     first_name = models.CharField()
+#     last_name = models.CharField()
+#     product = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+#     score = models.PositiveIntegerField(
+#         validators=[
+#             MinValueValidator(1),
+#             MaxValueValidator(5)
+#         ]
+#     )
+#     comment = models.TextField(blank=True, null=True)
+#
+#
+# class Patient(models.Model):
+#     user = models.OneToOneField(User, models.CASCADE)
     

@@ -5,7 +5,7 @@ admin.site.register(Doctor)
 
 admin.site.register(Comment)
 
-admin.site.register(Specializaion)
+admin.site.register(Specialize)
 
 admin.site.register(AvailableTime)
 
