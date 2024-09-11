@@ -20,5 +20,6 @@ def add_doctor(request):
             return render(request, 'create_doctor.html', {'forms': forms})
         forms.save()
     else:
+        print('test')
         forms = DoctorForm()
         return render(request, 'create_doctor.html', {'forms': forms})
